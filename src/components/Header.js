@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import ProductsContext from "../contexts";
+import ProductsContext from "../ProductsContext";
 
 function Header() {
   const sorts = [

@@ -1,8 +1,9 @@
-import Header from "./components/Header";
-import Products from "./components/Products";
 import { uniqBy } from "lodash";
 import { useEffect, useMemo, useState } from "react";
-import ProductsContext from "./contexts";
+import ProductsContext from "./ProductsContext";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import ProductDetails from "./views/ProductDetails";
+import Home from "./views/Home";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -19,12 +20,20 @@ function App() {
   }, [products]);
 
   return (
-    <ProductsContext.Provider value={{ products, filters, filter, setFilter }}>
-      <div>
-        <Header />
-        <Products />
-      </div>
-    </ProductsContext.Provider>
+    <Router>
+      <ProductsContext.Provider
+        value={{ products, filters, filter, setFilter }}
+      >
+        <Switch>
+          <Route path="/product-details/:id">
+            <ProductDetails />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </ProductsContext.Provider>
+    </Router>
   );
 }
 
