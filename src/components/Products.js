@@ -1,4 +1,4 @@
-import Product from "./product";
+import Product from "./Product";
 import { useContext } from "react";
 import ProductsContext from "../contexts";
 
@@ -8,13 +8,8 @@ function Products() {
     <section className="products">
       {products
         .filter((product) => !filter || product.category === filter)
-        .map((product) => (
-          <Product
-            key={product.id}
-            img={product.image}
-            title={product.title}
-            price={"$" + product.price}
-          />
+        .map(({ id, image, title, price }) => (
+          <Product key={id} img={image} title={title} price={"$" + price} />
         ))}
     </section>
   );

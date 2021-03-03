@@ -1,5 +1,5 @@
-import Header from "./components/header";
-import Products from "./components/products";
+import Header from "./components/Header";
+import Products from "./components/Products";
 import { uniqBy } from "lodash";
 import { useEffect, useMemo, useState } from "react";
 import ProductsContext from "./contexts";

@@ -1,12 +1,12 @@
-function Product(props) {
+function Product({ img, title, price }) {
   return (
     <div className="product-card">
       <div className="product-image">
-        <img alt="product-img" src={props.img} />
+        <img alt="product-img" src={img} />
       </div>
       <div className="product-info">
-        <h5>{props.title}</h5>
-        <h6>{props.price}</h6>
+        <h5>{title}</h5>
+        <h6>{price}</h6>
       </div>
     </div>
   );
