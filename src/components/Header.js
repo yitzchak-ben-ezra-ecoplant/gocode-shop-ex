@@ -22,7 +22,7 @@ function Header({ setPriceFilter, priceFilter }) {
   }, [products, filter]);
 
   const [min, max] = useMemo(() => {
-    return [Math.ceil(Math.min(...prices)), Math.floor(Math.max(...prices))];
+    return [Math.floor(Math.min(...prices)), Math.ceil(Math.max(...prices))];
   }, [prices]);
 
   useEffect(() => {
