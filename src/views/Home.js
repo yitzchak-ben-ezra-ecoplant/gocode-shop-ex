@@ -1,11 +1,14 @@
 import Header from "../components/Header";
 import Products from "../components/Products";
+import { useState } from "react";
 
 function Home() {
+  const [priceFilter, setPriceFilter] = useState([-Infinity, Infinity]);
+
   return (
     <div>
-      <Header />
-      <Products />
+      <Header setPriceFilter={setPriceFilter} priceFilter={priceFilter} />
+      <Products priceFilter={priceFilter} />
     </div>
   );
 }

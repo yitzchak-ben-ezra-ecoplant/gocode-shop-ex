@@ -1,7 +1,8 @@
-import { useContext } from "react";
+import { useContext, useMemo, useEffect } from "react";
 import ProductsContext from "../ProductsContext";
+import { Slider } from "antd";
 
-function Header() {
+function Header({ setPriceFilter, priceFilter }) {
   const sorts = [
     "Featured",
     "Best Selling",
@@ -12,16 +13,38 @@ function Header() {
     "Date, new to old",
     "Date, old to new",
   ];
-  const { filters, setFilter } = useContext(ProductsContext);
+  const { filters, setFilter, products, filter } = useContext(ProductsContext);
+
+  const prices = useMemo(() => {
+    return products
+      .filter((product) => !filter || product.category === filter)
+      .map((product) => product.price);
+  }, [products, filter]);
+
+  const [min, max] = useMemo(() => {
+    return [Math.ceil(Math.min(...prices)), Math.floor(Math.max(...prices))];
+  }, [prices]);
+
+  useEffect(() => {
+    setPriceFilter([min, max]);
+  }, [setPriceFilter, min, max]);
 
   return (
     <nav className="product-filter">
       <h1>Jackets</h1>
       <div className="sort">
+        <Slider
+          style={{ width: 200 }}
+          range
+          min={min}
+          max={max}
+          value={priceFilter}
+          onChange={(e) => setPriceFilter(e)}
+        />
         <div className="collection-sort">
           <label>Filter by:</label>
           <select onChange={(e) => setFilter(e.target.value)}>
-            {filters.map((filter) => (
+            {["", ...filters].map((filter) => (
               <option key={filter} value={filter}>
                 {filter}
               </option>

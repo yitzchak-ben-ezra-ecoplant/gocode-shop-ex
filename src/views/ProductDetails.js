@@ -11,7 +11,6 @@ function ProductDetails() {
       .then((json) => setProduct(json));
   }, [id]);
 
-  console.log(product);
   const { title, description, image, price } = product;
   return (
     <div>
@@ -22,7 +21,7 @@ function ProductDetails() {
       <h2>{title}</h2>
       <p>{description}</p>
       <h3>{"$" + price}</h3>
-      <img src={image} alt="product-image" />
+      <img src={image} alt="product" />
     </div>
   );
 }
